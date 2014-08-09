@@ -1,6 +1,6 @@
 #include <QApplication>
 #include "graph.h"
-#include "graphpair.h"
+#include "graphcontroller.h"
 #include "uibuilders.h"
 
 int main(int argc, char **argv) {
@@ -9,7 +9,7 @@ int main(int argc, char **argv) {
 	QVBoxLayout *layout = new QVBoxLayout();
 	QWidget *mainWidget = new QWidget();
 
-	GraphPair * g = new GraphPair(400, 400, new Calculator("Z^2"));
+	GraphController* g = new GraphController(2, new Calculator("Z^2"), 400, 400);
 	
 	QTabWidget *t = new QTabWidget();	
 	QPushButton *apply = new QPushButton();

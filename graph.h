@@ -1,3 +1,9 @@
+/* * Graph is a QLabel solely to allow convenient display of its internal QPixmap
+ * Graph handles DRAWING ONLY. There is no computation done here, QPointFs go in, QPointFs come out, nothing else.
+ * Graph catches events and emits signals which the GraphController catches and processes
+ * Graph should never have slots, that should be handled by GraphController
+ */
+
 #ifndef GRAPH_H
 #define GRAPH_H
 
@@ -7,66 +13,34 @@
 #include <QColor>
 #include <iostream>
 
-#include "calculator.h"
 #include "diff.h"
 
-#define drawpt(P) \
-	mpainter->drawPoints( ((QPointF *) (P)), 1);
-#define drawMousept(P) \
-	mpainter->drawEllipse( ((QPointF) (P)), CURSOR_POINT_RADIUS, CURSOR_POINT_RADIUS);
-#define applyDiff(D) \
-	mpainter->drawPixmap( ((diff) (D)).pos, ((diff) (D)).buffer );
-#define applyCursorDiff(D) \
-	mpainter->drawPixmap( ((cursordiff) (D)).pos, ((cursordiff) (D)).buffer );
-
-class Graph : public  QLabel {
+class Graph : public QLabel {
 	Q_OBJECT
 
 private:
 	QPainter *mpainter;
-	QPixmap *mout; 			// Displayed buffer
+	QPixmap *mout;
 
-	cursordiff mcursorcache;	//stores what was under the cursor dot
+	cursordiff mcursorcache;
 
-	struct graphprops {
-		QPointF mtopleft; //Location in computation units of the lower left corner
-		double xr;	// X range: total number of units of x range displayed
-		double xsc;	// X coordinate mark scale
-		double yr;	// Y range: total number of units of y range displayed
-		double ysc;	// Y coordinate mark scale
-	} mgraphprops;
-	int mode;		// 0 => point, 1 => iterate, 2 => iterate and currently drawing iterations
-	bool currentlyIterating;
-
-	Calculator *calc;
-
-	QPointF graphToCalc(QPointF p);
-	QPointF calcToGraph(QPointF p);
+	void applyCursorDiff();
 	void cacheCursorDiff(QPointF p);
 
 public:
-	Graph(int width, int height, Calculator *c = new Calculator,  QWidget * parent=0, Qt::WindowFlags f=0);
+	Graph(int width=400, int height=400, QWidget * parent=0, Qt::WindowFlags f=0);
 	~Graph();
-	//void drawCoordinates();		// draw on coordinate axes
 	void drawCursor(QPointF p);
 	void drawDot(QPointF p, bool withCursor = true);
-	void drawIterations(int numPerCycle, std::vector<QPointF> *points);
-
+	void drawIterations(std::vector<QPointF> *points, int numPoints);
 
 protected:
 	void mouseMoveEvent(QMouseEvent *ev);
 	void mousePressEvent(QMouseEvent *ev);
 
-
-public slots:
-	 //void s_applyGraphChanges(QPointF center, double newxr, double newyr, double newxsc, double newysc);
-	 void s_updateCursor(QMouseEvent *ev);
-	 void s_updateDot(QMouseEvent *ev);
-	 
 signals:
-	void s_updatePartnerDot(QMouseEvent *ev);	//For when click
-	void s_updatePartnerCursor(QMouseEvent *ev);	//For cursor move
+	void s_updatePartnerCursor(QPointF p, Graph *g);
+	void s_updatePartnerDot(QPointF p);
 };
-
 
 #endif

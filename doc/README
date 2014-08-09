@@ -1,0 +1,5 @@
+CPaint-Qt is a Qt-based rewrite of a rewrite of an old piece of software called Complex Paint, which was originally developed for Mac OS9.
+
+
+Known Bugs
+Some kind of memory error while doing iteration. Use Valgrind/gdb to check it out.
