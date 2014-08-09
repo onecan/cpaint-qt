@@ -25,7 +25,7 @@ public:
 	Calculator();
 	Calculator(string func);
 	~Calculator();
-	void setFunc(string f);
+	void setFct(string f);
 	void setVar(string var, string a);
 	void setVar(string var, QPointF p);
 	QPointF evalVar(string var);

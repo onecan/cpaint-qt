@@ -10,6 +10,10 @@ inline void Graph::cacheCursorDiff(QPointF p) {
 	mcursorcache.buffer = mout->copy(rectToCopy);
 }
 
+void Graph::clear() {
+	mout->fill();
+}
+
 Graph::Graph(int width, int height, QWidget *parent, Qt::WindowFlags f) :
 	QLabel(parent, f) {
 

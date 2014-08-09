@@ -1,6 +1,4 @@
 #include <QApplication>
-#include "graph.h"
-#include "graphcontroller.h"
 #include "uibuilders.h"
 
 int main(int argc, char **argv) {
@@ -10,12 +8,12 @@ int main(int argc, char **argv) {
 	QWidget *mainWidget = new QWidget();
 
 	GraphController* g = new GraphController(2, new Calculator("0.9*Z"), 400, 400);
-	
+
 	QTabWidget *t = new QTabWidget();	
 	QPushButton *apply = new QPushButton();
 	QPushButton *cancel = new QPushButton();
 	QComboBox *mode = new QComboBox();;
-	ui_functionControls(t, apply, cancel, mode);	
+	ui_functionControls(t, apply, cancel, mode, g);	
 	
 	layout->addWidget(t);
 	layout->addWidget(g);

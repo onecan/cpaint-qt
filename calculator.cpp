@@ -11,7 +11,7 @@ Calculator::~Calculator() {
 	delete t;
 }
 
-void Calculator::setFunc(string f) {
+void Calculator::setFct(string f) {
 	delete t;
 	t = new parser::Tree(f);
 }	

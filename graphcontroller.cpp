@@ -1,5 +1,4 @@
 #include "graphcontroller.h"
-#include <iostream>
 
 inline QPointF GraphController::calcToGraph(QPointF p) {
 	double xfac = mpixprops.width / mgraphprops.xr;
@@ -57,6 +56,17 @@ GraphController::~GraphController() {
 		delete mcalc;
 }
 
+void GraphController::setFct(string f) {
+	mcalc->setFct(f);
+}
+
+// check there so can use stock clicked(bool) signal from QPushButton
+void GraphController::s_clear(bool checked) {
+	for(int i = msize - 1; i >= 0; --i) {
+		mgraphs[i]->clear();
+	}
+}
+
 void GraphController::s_updateCursor(QPointF p, Graph *g) {
 	QPointF transformed = calcToGraph( mcalc->eval( graphToCalc(p) ));
 	for(int i = msize - 1; i >= 0; --i) {
@@ -103,4 +113,3 @@ void GraphController::s_updateDot(QPointF p) {
 		mmode = 1;
 	}
 }
-

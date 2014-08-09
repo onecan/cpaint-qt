@@ -1,22 +1,6 @@
 #include "uibuilders.h"
 
-void ui_functionControls_presets(QComboBox *presets) {
-	presets->setDuplicatesEnabled(false);
-	presets->addItem("Linear");
-	presets->addItem("Polar Linear");
-	presets->addItem("Quadratic");
-	presets->addItem("Inverse Quadratic");
-}
-
-void ui_functionControls_mode(QComboBox *mode) {
-	mode->addItem("Point");
-	mode->addItem("Iterate");
-}
-
-void ui_functionControls_subfuncs(QListWidget *l) {
-}
-
-void ui_functionControls(QTabWidget *t, QPushButton *apply, QPushButton *cancel, QComboBox *mode) {
+void ui_functionControls(QTabWidget *t, QPushButton *apply, QPushButton *cancel, QComboBox *mode, GraphController *g) {
 	QWidget *container = new QWidget();
 
 	QHBoxLayout *topBox = new QHBoxLayout();
@@ -44,8 +28,8 @@ void ui_functionControls(QTabWidget *t, QPushButton *apply, QPushButton *cancel,
 
 	bottomBox->addSpacerItem(new QSpacerItem(40, 20, QSizePolicy::Expanding));
 	apply->setText("Apply");
+	ui_functionControls_cancel(cancel, g);
 	bottomBox->addWidget(apply);
-	cancel->setText("Cancel");
 	bottomBox->addWidget(cancel);
 
 
@@ -56,4 +40,25 @@ void ui_functionControls(QTabWidget *t, QPushButton *apply, QPushButton *cancel,
 
 	container->setLayout(layout);
 	t->addTab(container, "Function");
+}
+
+void ui_functionControls_cancel(QPushButton *cancel, GraphController *g) {
+	cancel->setText("Cancel");
+	QObject::connect(cancel, SIGNAL(clicked(bool)), g, SLOT(s_clear(bool)) );
+}
+
+void ui_functionControls_mode(QComboBox *mode) {
+	mode->addItem("Point");
+	mode->addItem("Iterate");
+}
+
+void ui_functionControls_presets(QComboBox *presets) {
+	presets->setDuplicatesEnabled(false);
+	presets->addItem("Linear");
+	presets->addItem("Polar Linear");
+	presets->addItem("Quadratic");
+	presets->addItem("Inverse Quadratic");
+}
+
+void ui_functionControls_subfuncs(QListWidget *l) {
 }

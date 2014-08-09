@@ -28,6 +28,7 @@ private:
 	void cacheCursorDiff(QPointF p);
 
 public:
+	void clear();
 	Graph(int width=400, int height=400, QWidget * parent=0, Qt::WindowFlags f=0);
 	~Graph();
 	void drawCursor(QPointF p);

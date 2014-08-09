@@ -40,8 +40,11 @@ private:
 public:
 	GraphController(int numGraphs, Calculator *c = new Calculator(), int width=400, int height=400, QWidget *parent=0);
 	~GraphController();
+	void setFct(string f);
 public slots:
+	 void s_clear(bool checked);
 	 void s_updateCursor(QPointF p, Graph *g);
 	 void s_updateDot(QPointF p);
 };
+
 #endif
