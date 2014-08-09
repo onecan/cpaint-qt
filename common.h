@@ -1,0 +1,13 @@
+#ifndef COMMON_H
+#define COMMON_H
+
+#include <QObject>
+
+#define CURSOR_HEIGHT 5
+#define CURSOR_WIDTH 5
+#define HALF_CURSOR_WIDTH (CURSOR_WIDTH/2.)
+#define HALF_CURSOR_HEIGHT (CURSOR_HEIGHT/2.)
+#define POINT_RADIUS 1
+#define CURSOR_POINT_RADIUS 2
+
+#endif

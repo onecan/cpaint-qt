@@ -1,0 +1,44 @@
+GRAPH
+
+Graph handles the drawing of points to the canvas.
+
+MEMBERS
+
+QPainter *mpainter
+Responsible for drawing to the Graph
+
+QPixmap *mout
+The visible pixmap
+
+cursordiff mcursorcache
+A cache to hold the stuff below the cursor icon so that it doesn't overwrite stuff already on screen
+
+mgraphprops
+Holds center point and graph ranges and scales in User coordinates
+
+FUNCTIONS
+Graph(int width, int height, QWidget * parent=0, Qt::WindowFlags f=0);
+Creates a new Graph of dimensions width X height
+
+~Graph();
+Destructor
+
+void drawCursor(QPoint p);
+Draws cursor icon at location p in User coordiantes
+
+void drawDot(QPoint p);
+Draws dot when mouse clicked at point p in User coordinates
+
+SLOTS
+void s_updateCursor(QMouseEvent *ev);
+Updates cursor icon
+
+void s_updateDot(QMouseEvent *ev);
+Updates dots created by clicking
+
+SIGNALS
+void s_updatePartnerDot(QMouseEvent *ev);
+Signals other Graphs to update their dots created by clicking to match this Graph
+
+void s_updatePartnerCursor(QMouseEvent *ev);
+Signals other Graphs to update their cursor icon to match this Graph

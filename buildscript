@@ -1,0 +1,7 @@
+qmake-qt4 -project
+qmake-qt4
+sed -e '/^CXXFLAGS/ s/$/\ --std=c++11/' Makefile > temporaryMakefile
+rm Makefile
+cat temporaryMakefile >> Makefile
+rm temporaryMakefile
+make
