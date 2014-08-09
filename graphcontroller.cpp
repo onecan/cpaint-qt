@@ -69,6 +69,7 @@ void GraphController::s_updateCursor(QPointF p, Graph *g) {
 // As is stands, this implementation causes the green sursor on the input graph to jump to the dot drawn.
 // I am calling it a feature for now (it directs attention to the drawn dot, making it easy to find) pending feedback
 void GraphController::s_updateDot(QPointF p) {
+	// DEBUG
 	QPointF temp0 = p;
 	QPointF temp1 = graphToCalc(temp0);
 	QPointF temp2 = mcalc->eval(temp1);
@@ -78,6 +79,7 @@ void GraphController::s_updateDot(QPointF p) {
 			temp1.x(), temp1.y(),
 			temp2.x(), temp2.y(),
 			temp3.x(), temp3.y());
+	// END_DEBUG
 	if(mmode == 0) {
 		QPointF transformed = calcToGraph( mcalc->eval( graphToCalc(p) ));
 		for(int i = msize - 1; i >= 0; --i) {
@@ -86,9 +88,10 @@ void GraphController::s_updateDot(QPointF p) {
 	} else if(mmode == 1) {
 		mmode = 2;
 
-		int numPoints = 30;
 		std::vector<QPointF> *points = new std::vector<QPointF>();
-		mcalc->iterate(graphToCalc(p), numPoints, points);
+		int numPoints = mcalc->iterate(graphToCalc(p), points);
+		// DEBUG
+		printf("%d\n", numPoints);
 		for(int i = numPoints - 1; i >= 0; --i) {
 			(*points)[i] = calcToGraph( (*points)[i] );
 		}

@@ -8,6 +8,7 @@
 
 
 #define ITR_VAR	"Z"
+#define ITERATION_THRESHHOLD 0.00000000001
 #include "parser.h"
 #include <QPointF>
 
@@ -33,7 +34,7 @@ public:
 	void applyPreset(int preset);
 	string getFct();
 	string getVarFct(string var);
-	void iterate(QPointF seed, int numTimes, std::vector<QPointF> *output);
+	int iterate(QPointF seed, std::vector<QPointF> *output);
 	
 };
 #endif

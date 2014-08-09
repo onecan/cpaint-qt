@@ -9,7 +9,7 @@ int main(int argc, char **argv) {
 	QVBoxLayout *layout = new QVBoxLayout();
 	QWidget *mainWidget = new QWidget();
 
-	GraphController* g = new GraphController(2, new Calculator("Z^2"), 400, 400);
+	GraphController* g = new GraphController(2, new Calculator("0.9*Z"), 400, 400);
 	
 	QTabWidget *t = new QTabWidget();	
 	QPushButton *apply = new QPushButton();

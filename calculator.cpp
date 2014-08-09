@@ -78,18 +78,31 @@ cx Calculator::qpfToCx(QPointF *p) {
 	return cx(p->x(), p->y());
 }
 
-void Calculator::iterate(QPointF seed, int numTimes, std::vector<QPointF> *output) {
-	t->setVar(ITR_VAR, qpfToCx(seed));
+int Calculator::iterate(QPointF seed, std::vector<QPointF> *output) {
 	if(output->size() != 0) {
 		output->clear();
 	}
-	for(int i = numTimes; i >= 0; --i) {
+
+	cx result;
+	double xdifference;
+	double ydifference;
+	t->setVar(ITR_VAR, qpfToCx(seed));
+	for(int i = 0; ; ++i) {
 		try {
-			cx result = t->eval();
+			result = t->eval();
 			output->push_back(cxToQpf(result));
+			if(i >= 1) {
+				xdifference = (*output)[i].x() - (*output)[i-1].x();
+				ydifference = (*output)[i].y() - (*output)[i-1].y();
+				if( (xdifference > 0 ? xdifference : -xdifference) < ITERATION_THRESHHOLD &&
+					(ydifference > 0 ? ydifference : -ydifference) < ITERATION_THRESHHOLD) {
+					return i;
+				}
+			}
 			t->setVar(ITR_VAR , result);
 		} catch(const std::invalid_argument& e) {
-			break;
+			return i;
 		}
 	}
+	return -1;
 }
