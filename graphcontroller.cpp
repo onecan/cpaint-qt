@@ -1,6 +1,6 @@
 #include "graphcontroller.h"
 
-inline QPointF GraphController::calcToGraph(QPointF p) {
+QPointF GraphController::calcToGraph(QPointF p) {
 	double xfac = mpixprops.width / mgraphprops.xr;
 	double yfac = mpixprops.height / mgraphprops.yr;
 	double x = xfac * (p.x() - mgraphprops.mtopleft.x());
@@ -8,7 +8,7 @@ inline QPointF GraphController::calcToGraph(QPointF p) {
 	return QPointF(x, y);
 }
 
-inline QPointF GraphController::graphToCalc(QPointF p) {
+QPointF GraphController::graphToCalc(QPointF p) {
 	double xfac = mgraphprops.xr / mpixprops.width;
 	double yfac = mgraphprops.yr / mpixprops.height;
 	double x = xfac * p.x() + mgraphprops.mtopleft.x();

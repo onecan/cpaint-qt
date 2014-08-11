@@ -10,7 +10,7 @@
 
 #include "inputedit.h"
 #include "layouts.h"
-#include "graphcontroller.cpp"
+#include "graphcontroller.h"
 
 void ui_functionControls(QTabWidget *t, QPushButton *apply, QPushButton *cancel, QComboBox *mode, GraphController *g);
 void ui_functionControls_cancel(QPushButton *cancel, GraphController *g);
