@@ -1,0 +1,12 @@
+INPUT(
+./release\calculator.o
+./release\graph.o
+./release\graphcontroller.o
+./release\inputedit.o
+./release\main.o
+./release\parser.o
+./release\uibuilders.o
+./release\moc_graph.o
+./release\moc_graphcontroller.o
+./release\moc_inputedit.o
+);

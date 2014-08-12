@@ -87,7 +87,7 @@ int Calculator::iterate(QPointF seed, std::vector<QPointF> *output) {
 	double xdifference;
 	double ydifference;
 	t->setVar(ITR_VAR, qpfToCx(seed));
-	for(int i = 0; ; ++i) {
+    for(int i = 0; i < 10000; ++i) {
 		try {
 			result = t->eval();
 			output->push_back(cxToQpf(result));
@@ -104,5 +104,5 @@ int Calculator::iterate(QPointF seed, std::vector<QPointF> *output) {
 			return i;
 		}
 	}
-	return -1;
+    return 10000;
 }

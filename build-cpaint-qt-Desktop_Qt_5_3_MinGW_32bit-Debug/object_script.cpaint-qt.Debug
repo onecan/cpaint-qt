@@ -1,0 +1,12 @@
+INPUT(
+./debug\calculator.o
+./debug\graph.o
+./debug\graphcontroller.o
+./debug\inputedit.o
+./debug\main.o
+./debug\parser.o
+./debug\uibuilders.o
+./debug\moc_graph.o
+./debug\moc_graphcontroller.o
+./debug\moc_inputedit.o
+);
