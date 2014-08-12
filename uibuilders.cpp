@@ -1,6 +1,6 @@
 #include "uibuilders.h"
 
-void ui_functionControls(QTabWidget *t, QPushButton *apply, QPushButton *cancel, QComboBox *mode, GraphController *g) {
+void ui_functionControls(QTabWidget *t, QPushButton *clear, QPushButton *cancel, QPushButton *apply, QComboBox *mode, GraphController *g) {
 	QWidget *container = new QWidget();
 
 	QHBoxLayout *topBox = new QHBoxLayout();
@@ -27,10 +27,12 @@ void ui_functionControls(QTabWidget *t, QPushButton *apply, QPushButton *cancel,
 	bottomBox->addWidget(mode);
 
 	bottomBox->addSpacerItem(new QSpacerItem(40, 20, QSizePolicy::Expanding));
-	apply->setText("Apply");
-	ui_functionControls_cancel(cancel, g);
-	bottomBox->addWidget(apply);
+	ui_functionControls_clear(clear, g);
+	ui_functionControls_cancel(cancel);
+	ui_functionControls_apply(apply, g);
+	bottomBox->addWidget(clear);
 	bottomBox->addWidget(cancel);
+	bottomBox->addWidget(apply);
 
 
 	QVBoxLayout *layout = new QVBoxLayout();
@@ -42,9 +44,17 @@ void ui_functionControls(QTabWidget *t, QPushButton *apply, QPushButton *cancel,
 	t->addTab(container, "Function");
 }
 
-void ui_functionControls_cancel(QPushButton *cancel, GraphController *g) {
+void ui_functionControls_apply(QPushButton *apply, GraphController *g) {
+	apply->setText("Apply Changes");
+}
+
+void ui_functionControls_cancel(QPushButton *cancel) {
 	cancel->setText("Cancel");
-	QObject::connect(cancel, SIGNAL(clicked(bool)), g, SLOT(s_clear(bool)) );
+}
+
+void ui_functionControls_clear(QPushButton *clear, GraphController *g) {
+	clear->setText("Clear Graphs");
+	QObject::connect(clear, SIGNAL(pressed()), g, SLOT(s_clear()) );
 }
 
 void ui_functionControls_mode(QComboBox *mode) {

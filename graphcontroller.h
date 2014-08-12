@@ -42,7 +42,7 @@ public:
 	~GraphController();
 	void setFct(string f);
 public slots:
-	 void s_clear(bool checked);
+	 void s_clear();
 	 void s_updateCursor(QPointF p, Graph *g);
 	 void s_updateDot(QPointF p);
 };

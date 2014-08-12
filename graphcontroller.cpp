@@ -60,8 +60,7 @@ void GraphController::setFct(string f) {
 	mcalc->setFct(f);
 }
 
-// check there so can use stock clicked(bool) signal from QPushButton
-void GraphController::s_clear(bool checked) {
+void GraphController::s_clear() {
 	for(int i = msize - 1; i >= 0; --i) {
 		mgraphs[i]->clear();
 	}

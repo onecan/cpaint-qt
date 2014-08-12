@@ -10,10 +10,11 @@ int main(int argc, char **argv) {
 	GraphController* g = new GraphController(2, new Calculator("0.9*Z"), 400, 400);
 
 	QTabWidget *t = new QTabWidget();	
-	QPushButton *apply = new QPushButton();
+	QPushButton *clear = new QPushButton();
 	QPushButton *cancel = new QPushButton();
+	QPushButton *apply = new QPushButton();
 	QComboBox *mode = new QComboBox();;
-	ui_functionControls(t, apply, cancel, mode, g);	
+	ui_functionControls(t, clear, cancel, apply, mode, g);
 	
 	layout->addWidget(t);
 	layout->addWidget(g);
